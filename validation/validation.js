@@ -1,4 +1,4 @@
-export default function validateLogIn(values, validations) {
+export default function validateLogIn(values) {
 	let errors = {};
 	if (!values.username) {
 		errors.username = 'username is required';
@@ -38,17 +38,12 @@ export default function validateLogIn(values, validations) {
 	if (values.hasOwnProperty('confirmPassword')) {
 		if (!values.confirmPassword) {
 			errors.confirmPassword = 'confirmPassword is required';
+		} else if (values.password != values.confirmPassword) {
+			errors.confirmPassword = 'Passwords do not match';
 		} else if (!/validations.confirmPassword/.test(values.confirmPassword)) {
 			errors.confirmPassword = 'Invalid confirmPassword';
 		}
 	}
 
-	if (values.hasOwnProperty('custom_country')) {
-		if (!values.custom_country) {
-			errors.custom_country = 'custom_country is required';
-		} else if (!/validations.custom_country/.test(values.custom_country)) {
-			errors.custom_country = 'Invalid custom_country';
-		}
-	}
 	return errors;
 }
